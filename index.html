@@ -29,8 +29,8 @@
 						<nav id="nav">
 							<ul>
 								<li><a href="#top" id="top-link"><span class="icon solid fa-home">Intro</span></a></li>
-								<li><a href="#portfolio" id="portfolio-link"><span class="icon solid fa-th">Steps</span></a></li>
-								<li><a href="#about" id="about-link"><span class="icon solid fa-user">Area of Interest</span></a></li>
+								<li><a href="#portfolio" id="portfolio-link"><span class="icon solid fa-th">About</span></a></li>
+								<li><a href="#about" id="about-link"><span class="icon solid fa-user">Objectives</span></a></li>
 								<li><a href="#contact" id="contact-link"><span class="icon solid fa-envelope">Contact</span></a></li>
 							</ul>
 						</nav>
@@ -97,7 +97,8 @@
 								<h2>Area of Interest</h2>
 							</header>	
 							<a href="#" class="image featured"><img src="images/Picture3.jpg" alt="" /></a>
-							<p>The study area is the Betampona Nature Reserve (BNR), outlined by the white boundary in Figure 1 (a).  
+							<p>
+								The study area is the Betampona Nature Reserve (BNR), outlined by the white boundary in Figure 1 (a).  
 								The BNR is located in the eastern coast of Madagascar; the surrounding areas and the nature reserve make 
 								up of about 100 square km.  This is a species rich area which provides the researchers with a “living laboratory” 
 								for the studies of human-forest interactions.<br />  
@@ -107,6 +108,45 @@
 								of invasive species such as Molucca Raspberry, Madagascar Cardamom, and Strawberry 
 								Guava, biodiversity continues to be threatened.
 							</p>
+
+                            <header>
+								<h2>Data Processing</h2>
+								<a href="#" class="image featured"><img src="images/Data_table.jpg" alt="" /></a>
+								<p>
+									The original ground truth data were collected in the field using GPS surveys. 
+									A total of nearly 400 polygons in different sizes and shapes and point samples 
+									were collected. These ground surveys were used to produce the “gold-standard" 
+									reference imagery (Bet_LandCover_2019.tif) as described in the published paper.
+									For this course module, however, we generated a new set of training samples
+									from the gold-standard reference imagery to simplify the implementation.<br />
+
+									First, observe the following map:
+									<a href="#" class="image featured"><img src="images/four_sat_img.jpg" alt="" /></a><br />
+
+									As stated above, the WV-3 image contains 16 bands. Further details about the 16 bands 
+									can be found in  Cota et al. (2021). There are a total of 11 land cover classes that 
+									were created by CNN-based image segmentation.  That means all pixels in the study area 
+									lready classified as some land cover/use type. The codes for each land cover class 
+									are given below: <br />
+
+									<a href="#" class="image featured"><img src="images/LULC.jpg" alt="" /></a><br />
+
+									U-NET requires image patches or image chips as input data. To create this data for 
+									this tutorial, we generated a polygon shapefile, named ‘polygon.shp”, based on the 
+									gold-standard land cover/use map. This polygon represents the boundary of image 
+									patches, which will be later used to train the U-Net architecture and evaluate the 
+									results. There are a total of 100 features in the polygon shapefile. The steps to 
+									generate these training samples are below. <br />
+									1.	Create a set of randomly generated points using ArcGIS Pro. To do this, 
+									open ArcToolbox and open the Data Management 
+									Tools > Feature Class > Create random points tool.<br />
+									2.	Create a circular buffer around those points, set buffer size to 192 meters.<br />
+									3.	Convert the circle to a square-shaped polygon by using “Minimum Bounding Geometry” 
+									tool and use “Envelope” as the geometry type
+
+									<a href="#" class="image featured"><img src="images/Polygons.jpg" alt="" /></a><br />
+								</p>
+							</header>
 
 							<div class="row">
 								<div class="col-4 col-12-mobile">
